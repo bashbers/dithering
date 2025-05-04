@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "optipng": "^4.2.0",
     "pngjs": "^7.0.0",
     "zlib": "^1.0.5"
   }
