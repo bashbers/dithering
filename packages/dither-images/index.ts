@@ -3,7 +3,7 @@ var fs = require("fs");
 var OptiPng = require('optipng');
 var path = require('path')
 
-function colorClamp(value) {
+function colorClamp(value: number) {
 	if(value < 0) return 0;
 	else if(value > 255) return 255;
 
@@ -22,7 +22,7 @@ var bayerMatrix8x8 = [
 	];
 
 	// int r, int g, int b, int[][] palette, int paletteLength
-	function getClosestPaletteColorIndex(r, g, b, palette, paletteLength) {
+	function getClosestPaletteColorIndex(r: number, g: number, b: number, palette: number[][], paletteLength: number) {
 		var minDistance = 195076;
 		var diffR, diffG, diffB;
 		var distanceSquared;
@@ -49,7 +49,7 @@ var bayerMatrix8x8 = [
 	}
 
 // TODO: inPixels -> inComponents or inColors or something more accurate
-function BayerDithering(inPixels, width, height, palette) {
+function BayerDithering(inPixels: number[], width: number, height: number, palette: number[][]) {
 	var offset = 0;
 	var indexedOffset = 0;
 	var r, g, b;

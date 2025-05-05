@@ -16,6 +16,7 @@
     "zlib": "^1.0.5"
   },
   "devDependencies": {
-    "@types/node": "^22.15.3"
+    "@types/node": "^22.15.3",
+    "ts-node": "^10.9.2"
   }
 }
