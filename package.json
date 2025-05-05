@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node packages/dither-images/index.ts",
+    "dev": "npx ts-node packages/dither-images/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "bashbers",
   "license": "ISC",
   "dependencies": {
     "optipng": "^4.2.0",
