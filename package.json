@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx ts-node packages/dither-images/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "astro --root demo dev",
+    "build": "astro --root demo build",
+    "serve": "astro --root demo preview"
   },
   "author": "bashbers",
   "license": "ISC",
@@ -17,6 +19,11 @@
   },
   "devDependencies": {
     "@types/node": "^22.15.3",
-    "ts-node": "^10.9.2"
-  }
+    "ts-node": "^10.9.2",
+    "astro": "^5.7.10"
+  },
+  "workspaces": [
+    "demo",
+    "packages/**/*"
+  ]
 }
