@@ -1,6 +1,6 @@
 {
   "name": "@bashbers/astro-image-dithering",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Proof of Concept which uses the following libraries:",
   "main": "index.js",
   "scripts": {
@@ -28,7 +28,10 @@
     "demo",
     "packages/**/*"
   ],
-  "files": ["./packages/dither-images/", "!*.png"],
+  "files": [
+    "./packages/dither-images/",
+    "!*.png"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/bashbers/dithering.git"
