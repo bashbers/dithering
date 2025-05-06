@@ -1,9 +1,9 @@
 import type { Root } from 'hast';
 import type { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
-import path from 'path';
+import path from 'node:path';
 
-const rehypeDitheredImageContainerHtml: Plugin<[], Root> = () => {
+export const rehypeDitheredImageContainerHtml: Plugin<[], Root> = () => {
   return (tree: Root) => {
     visit(tree, 'element', (node: any, index: number, parent: any) => {
       if (node.tagName === 'img' && parent) {
