@@ -28,6 +28,7 @@
     "demo",
     "packages/**/*"
   ],
+  "files": ["./packages/dither-images/", "!*.png"],
   "repository": {
     "type": "git",
     "url": "https://github.com/bashbers/dithering.git"
