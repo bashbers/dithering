@@ -10,6 +10,7 @@
     "postbuild": ""
   },
   "dependencies": {
+    "@bashbers/astro-image-dithering": "^1.0.1",
     "astro": "^5.7.10"
   }
 }

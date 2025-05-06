@@ -6,7 +6,9 @@
   "scripts": {
     "start": "astro --root demo dev",
     "build": "astro --root demo build",
-    "serve": "astro --root demo preview"
+    "serve": "astro --root demo preview",
+
+    "npm-build": "npx tsc -p packages/dither-images/index.ts"
   },
   "author": "https://github.com/bashbers/",
   "license": "GPL-3.0",

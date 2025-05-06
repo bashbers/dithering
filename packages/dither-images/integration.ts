@@ -1,4 +1,4 @@
-import { AstroIntegration } from "astro/dist/types/public";
+import { AstroIntegration } from "astro";
 import { cwd } from "node:process";
 import { PNG } from 'pngjs';
 import { createReadStream, createWriteStream} from "node:fs";

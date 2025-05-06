@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import { rehypeDitheredImageContainerHtml, ditherImagesIntegration} from '../packages/dither-images'
+import { rehypeDitheredImageContainerHtml, ditherImagesIntegration} from '@bashbers/astro-image-dithering/packages/dither-images'
 import { cwd } from 'process';
 
 // https://astro.build/config
