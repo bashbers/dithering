@@ -4,5 +4,23 @@ Proof of Concept which uses the following libraries:
 - https://www.npmjs.com/package/optipng
 - https://github.com/sole/node-dithering/tree/master
 
-It succesfully opens a provided png, dithers it using Bayer dithering and saves it as output.png.
-This decreases the filesize from 28.87kb to 2.85kb, a factor 10 decrease in filesize.
+It exposes 2 files:
+
+- integration.ts - The Astro integration
+- rehypeDitheredImageContainerHtml.ts - the rehype plugin
+
+Both can be used like this in your astro.config.mjs:
+
+```js
+import {
+  rehypeDitheredImageContainerHtml,
+  ditherImagesIntegration,
+} from "../packages/dither-images"; // This should be changed to the NPM package name
+
+export default defineConfig({
+  markdown: {
+    rehypePlugins: [rehypeDitheredImageContainerHtml],
+  },
+  integrations: [ditherImagesIntegration()],
+});
+```
