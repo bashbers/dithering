@@ -1,15 +1,15 @@
 {
-  "name": "dithering",
+  "name": "@bashbers/astro-image-dithering",
   "version": "1.0.0",
-  "description": "",
+  "description": "Proof of Concept which uses the following libraries:",
   "main": "index.js",
   "scripts": {
     "start": "astro --root demo dev",
     "build": "astro --root demo build",
     "serve": "astro --root demo preview"
   },
-  "author": "bashbers",
-  "license": "ISC",
+  "author": "https://github.com/bashbers/",
+  "license": "GPL-3.0",
   "dependencies": {
     "optipng": "^4.2.0",
     "pngjs": "^7.0.0",
@@ -27,5 +27,18 @@
   "workspaces": [
     "demo",
     "packages/**/*"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bashbers/dithering.git"
+  },
+  "keywords": [
+    "dithering",
+    "dither",
+    "astro"
+  ],
+  "bugs": {
+    "url": "https://github.com/bashbers/dithering/issues"
+  },
+  "homepage": "https://github.com/bashbers/dithering#readme"
 }

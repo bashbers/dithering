@@ -6,8 +6,12 @@ Proof of Concept which uses the following libraries:
 
 It exposes 2 files:
 
-- integration.ts - The Astro integration
+- integration.ts
 - rehypeDitheredImageContainerHtml.ts - the rehype plugin
+
+The Astro integration will traverse your Astro directory searching for PNG files and convert them to dithered images using the -dithered.png suffix. They will be stored next to the original images.
+
+The rehype plugin which will convert your existing image inclusions in your .md files to a figure containing both the image and a toggle to switch between the dithered and non-dithered version.
 
 Both can be used like this in your astro.config.mjs:
 
