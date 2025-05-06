@@ -1,7 +1,10 @@
-var { PNG } = require('pngjs');
-var fs = require("fs");
-var OptiPng = require('optipng');
-var path = require('path')
+import { AstroIntegration } from "astro/dist/types/public";
+import { cwd } from "process";
+
+import { PNG } from 'pngjs';
+import { readdirSync,statSync,  createReadStream, createWriteStream} from "fs";
+import OptiPng from 'optipng'
+import path from 'path'
 
 function colorClamp(value: number) {
 	if(value < 0) return 0;
@@ -83,15 +86,15 @@ function BayerDithering(inPixels: number[], width: number, height: number, palet
 
 function recursiveFindByExtension(base: string,ext: string,files: any,result: string[]) 
 {
-    files = files || fs.readdirSync(base) 
+    files = files || readdirSync(base) 
     result = result || [] 
 
     files.forEach( 
         function (file) {
             var newbase = path.join(base,file)
-            if ( fs.statSync(newbase).isDirectory() )
+            if ( statSync(newbase).isDirectory() )
             {
-                result = recursiveFindByExtension(newbase,ext,fs.readdirSync(newbase),result)
+                result = recursiveFindByExtension(newbase,ext,readdirSync(newbase),result)
             }
             else
             {
@@ -105,101 +108,68 @@ function recursiveFindByExtension(base: string,ext: string,files: any,result: st
     return result
 }
 
-const foundPngFiles = recursiveFindByExtension(__dirname, 'png', null, []);
-console.log(foundPngFiles);
-
-for (let i = 0; i < foundPngFiles.length; i++) {
-	const foundPng = foundPngFiles[i];
-	if(foundPng.includes('-dithered.png')) {
-		continue;
-	}
-
-	fs.createReadStream(foundPng)
-	.pipe(new PNG())
-	.on('parsed', function () {
-		// `this` is a PNG instance
-		const pixels = this.data;
-		const palette = [[25,25,25], [75,75,75],[125,125,125],[175,175,175],[225,225,225],[250,250,250]]
-		const dithered = BayerDithering(pixels, this.width, this.height, palette);
-		
-		// The final image
-		const png = new PNG({
-			width: this.width,
-			height: this.height,
-		});
-		// Intermittent rgba array with every 4th item set to 255 for opacity.
-		const rgba = new Uint8Array(this.width * this.height * 4);
-
-		// Dithered is actually a index, not concrete values yet.
-		for (let i = 0; i < dithered.length; i++) {
-		const color = palette[dithered[i]]; // [R, G, B]
-		
-		const rgbaOffset = i * 4;
-		rgba[rgbaOffset]     = color[0]; // R
-		rgba[rgbaOffset + 1] = color[1]; // G
-		rgba[rgbaOffset + 2] = color[2]; // B
-		rgba[rgbaOffset + 3] = 255;      // A
-		}
-		
-		// Fill png.data with the RGBA values
-		for (let i = 0; i < rgba.length; i++) {
-			png.data[i] = rgba[i] || 0;
-		}
-
-		//Optimize range is between 1 and 7. Its lossless so we use 7.
-		const optimizer = new OptiPng(['-o7']); 
-		const ditheredFilename = foundPng.split('.')[0] + "-dithered.png";
-		png.pack()
-			.pipe(optimizer)
-			.pipe(fs.createWriteStream(ditheredFilename)).on('finish', () => {
-			console.log('Success!');
-		});
-	});
-
-	
+interface ditherImagesOptions {
+	directoryToTraverse: string;
 }
-// console.log(foundPngFiles);
 
-// fs.createReadStream('./test_images/nontransparent-bg.png')
-//   .pipe(new PNG())
-//   .on('parsed', function () {
-//     // `this` is a PNG instance
-//     const pixels = this.data;
-//     const palette = [[25,25,25], [75,75,75],[125,125,125],[175,175,175],[225,225,225],[250,250,250]]
-//     const dithered = BayerDithering(pixels, this.width, this.height, palette);
-    
-//     // The final image
-//     const png = new PNG({
-//         width: this.width,
-//         height: this.height,
-//     });
-//     // Intermittent rgba array with every 4th item set to 255 for opacity.
-//     const rgba = new Uint8Array(this.width * this.height * 4);
+export default function ditherImagesIntegration(options: ditherImagesOptions): AstroIntegration {
+	const { directoryToTraverse = cwd() } = options;
+	return {
+		name: 'dither-images-integration',
+		hooks: {
+			'astro:build:start': async ({logger}) => {
+				const foundPngFiles = recursiveFindByExtension(directoryToTraverse, 'png', null, []);
+				logger.info(foundPngFiles.toString());
 
-//     // Dithered is actually a index, not concrete values yet.
-//     for (let i = 0; i < dithered.length; i++) {
-//       const color = palette[dithered[i]]; // [R, G, B]
-    
-//       const rgbaOffset = i * 4;
-//       rgba[rgbaOffset]     = color[0]; // R
-//       rgba[rgbaOffset + 1] = color[1]; // G
-//       rgba[rgbaOffset + 2] = color[2]; // B
-//       rgba[rgbaOffset + 3] = 255;      // A
-//     }
-    
-//     // Fill png.data with the RGBA values
-//     for (let i = 0; i < rgba.length; i++) {
-//         png.data[i] = rgba[i] || 0;
-//     }
+				for (let i = 0; i < foundPngFiles.length; i++) {
+					const foundPng = foundPngFiles[i];
+					if(foundPng.includes('-dithered.png')) {
+						continue;
+					}
 
-// 	//Optimize range is between 1 and 7. Its lossless so we use 7.
-//     const optimizer = new OptiPng(['-o7']); 
+					createReadStream(foundPng)
+					.pipe(new PNG())
+					.on('parsed', function () {
+						// `this` is a PNG instance
+						const pixels = this.data;
+						const palette = [[25,25,25], [75,75,75],[125,125,125],[175,175,175],[225,225,225],[250,250,250]]
+						const dithered = BayerDithering(pixels, this.width, this.height, palette);
+						
+						// The final image
+						const png = new PNG({
+							width: this.width,
+							height: this.height,
+						});
+						// Intermittent rgba array with every 4th item set to 255 for opacity.
+						const rgba = new Uint8Array(this.width * this.height * 4);
 
-//     png.pack()
-//         .pipe(optimizer)
-//         .pipe(fs.createWriteStream('./test-images/output.png')).on('finish', () => {
-//         console.log('Success!');
-//     });
-// });
+						// Dithered is actually a index, not concrete values yet.
+						for (let i = 0; i < dithered.length; i++) {
+						const color = palette[dithered[i]]; // [R, G, B]
+						
+						const rgbaOffset = i * 4;
+						rgba[rgbaOffset]     = color[0]; // R
+						rgba[rgbaOffset + 1] = color[1]; // G
+						rgba[rgbaOffset + 2] = color[2]; // B
+						rgba[rgbaOffset + 3] = 255;      // A
+						}
+						
+						// Fill png.data with the RGBA values
+						for (let i = 0; i < rgba.length; i++) {
+							png.data[i] = rgba[i] || 0;
+						}
 
-// // export default function DitherImages()
+						//Optimize range is between 1 and 7. Its lossless so we use 7.
+						const optimizer = new OptiPng(['-o7']); 
+						const ditheredFilename = foundPng.split('.')[0] + "-dithered.png";
+						png.pack()
+							.pipe(optimizer)
+							.pipe(createWriteStream(ditheredFilename)).on('finish', () => {
+							logger.info('Success!');
+						});
+					});
+				}
+			}
+		}
+	}
+}

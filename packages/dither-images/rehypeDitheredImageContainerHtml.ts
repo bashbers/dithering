@@ -19,7 +19,7 @@ const rehypeDitheredImageContainerHtml: Plugin<[], Root> = () => {
           // Start with the dithered image as src
           const html = `
             <figure class="dithered-image-container" data-src-a="${originalSrc}" data-src-b="${ditheredSrc}">
-                <img src="${ditheredSrc}" alt="${alt}" />
+                <img class="dithered" src="${ditheredSrc}" alt="${alt}" />
                 <button type="button">Toggle</button>
             </figure>
           `;
