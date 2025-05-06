@@ -2,20 +2,19 @@
   "name": "@bashbers/astro-image-dithering",
   "version": "1.0.1",
   "description": "Proof of Concept which uses the following libraries:",
-  "main": "index.js",
   "scripts": {
-    "start": "astro --root demo dev",
-    "build": "astro --root demo build",
-    "serve": "astro --root demo preview",
-
-    "npm-build": "npx tsc -p packages/dither-images/index.ts"
+    "start-astro": "astro --root demo dev",
+    "build-astro": "astro --root demo build",
+    "serve-astro": "astro --root demo preview",
+    "build": "npm run clean && npx tsc -p ./tsconfig.json",
+    "clean": "del-cli ./dist",
+    "prepack": "npm run build"
   },
   "author": "https://github.com/bashbers/",
   "license": "GPL-3.0",
   "dependencies": {
     "optipng": "^4.2.0",
     "pngjs": "^7.0.0",
-    "typescript": "^5.8.3",
     "zlib": "^1.0.5"
   },
   "devDependencies": {
@@ -24,16 +23,19 @@
     "@types/pngjs": "^6.0.5",
     "@types/unist": "^3.0.3",
     "astro": "^5.7.10",
-    "ts-node": "^10.9.2"
+    "del-cli": "^6.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   },
   "workspaces": [
     "demo",
     "packages/**/*"
   ],
   "files": [
-    "./packages/dither-images/",
-    "!*.png"
+    "./dist/**/*"
   ],
+  "main": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/bashbers/dithering.git"

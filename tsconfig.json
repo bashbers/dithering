@@ -1,19 +1,22 @@
 {
     "compilerOptions": {
-        "module": "CommonJS",
+        "lib": [],
+        "target": "ES2024",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "outDir": "./dist/",
+        "declarationDir": "./dist/types",
+        "strict": true,
         "esModuleInterop": true,
-        "outDir": "dist",
-        "noEmit": false,
-        "target": "es6",
-        "lib": []
-    },
-    "exclude": [
-        "node_modules",
-        "demo",
-        "dist"
-    ],
-    "paths": {
-        // workaround for: https://github.com/vitest-dev/vitest/issues/4567
-        "rollup/parseAst": ["./node_modules/rollup/dist/parseAst"]
-    }
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+        "checkJs": true,
+        "allowJs": true,
+        "declaration": true,
+        "declarationMap": true,
+        "allowSyntheticDefaultImports": true
+      },
+  
+      "files": ["./packages/dither-images/index.ts"],
+      "exclude": ["node_modules"]
 }
