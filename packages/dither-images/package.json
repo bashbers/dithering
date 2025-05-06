@@ -2,7 +2,6 @@
     "name": "astro-dither-images",
     "version": "1.0.0",
     "description": "Astro component to easily dither images using Bayer dithering.",
-    "type": "module",
     "exports": {
       ".": "./index.ts"
     },

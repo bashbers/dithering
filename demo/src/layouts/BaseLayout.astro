@@ -1,0 +1,25 @@
+---
+
+---
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <script>
+      import "../../../packages/dither-images/dithered-image-container.js";
+    </script>
+    <title>Astro</title>
+  </head>
+  <body
+    class="bg-global-bg text-global-text mx-auto flex min-h-screen max-w-3xl flex-col px-4 pt-16 font-mono text-sm font-normal antialiased sm:px-8"
+  >
+    <main id="main">
+      <h1>Test environment</h1>
+      <slot />
+    </main>
+  </body>
+</html>

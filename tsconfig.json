@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
-        "module": "commonjs"
+        "module": "commonjs",
+        "esModuleInterop": true
     },
     "exclude": [
         "node_modules"

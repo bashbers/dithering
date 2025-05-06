@@ -18,9 +18,11 @@
     "zlib": "^1.0.5"
   },
   "devDependencies": {
+    "@types/hast": "^3.0.4",
     "@types/node": "^22.15.3",
-    "ts-node": "^10.9.2",
-    "astro": "^5.7.10"
+    "@types/unist": "^3.0.3",
+    "astro": "^5.7.10",
+    "ts-node": "^10.9.2"
   },
   "workspaces": [
     "demo",
