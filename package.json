@@ -1,6 +1,6 @@
 {
   "name": "@bashbers/astro-image-dithering",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Astro image dithering plugin - converts png's in project to dithered.pngs and uses them inside markdown files.",
   "scripts": {
     "start-astro": "astro --root demo dev",
