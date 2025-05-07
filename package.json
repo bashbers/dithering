@@ -33,7 +33,8 @@
     "packages/**/*"
   ],
   "files": [
-    "packages/dither-images/**"
+    "packages/dither-images/**",
+    "!*.png"
   ],
   "exports": {
     ".": {
