@@ -32,6 +32,9 @@
     "demo",
     "packages/**/*"
   ],
+  "files": [
+    "packages/dither-images/**"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
   "repository": {
