@@ -5,7 +5,7 @@ import path from 'node:path';
 
 export const rehypeDitheredImageContainerHtml: Plugin<[], Root> = () => {
   return (tree: Root) => {
-    visit(tree, 'element', (node: any, index: number, parent: any) => {
+    visit(tree, 'element', (node: any, index?: any, parent?: any) => {
       if (node.tagName === 'img' && parent) {
         const originalSrc = node.properties?.src;
         const alt = node.properties?.alt || '';

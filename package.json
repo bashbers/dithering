@@ -1,15 +1,16 @@
 {
   "name": "@bashbers/astro-image-dithering",
   "version": "1.0.2",
-  "description": "Proof of Concept which uses the following libraries:",
+  "description": "Astro image dithering plugin - converts png's in project to dithered.pngs and uses them inside markdown files.",
   "scripts": {
     "start-astro": "astro --root demo dev",
     "build-astro": "astro --root demo build",
     "serve-astro": "astro --root demo preview",
-    "build": "npm run clean && npx tsc -p ./tsconfig.json",
+    "build": "npm run clean && npx tsc -p tsconfig.json",
     "clean": "del-cli ./dist",
     "prepack": "npm run build"
   },
+  "type": "module",
   "author": "https://github.com/bashbers/",
   "license": "GPL-3.0",
   "dependencies": {
@@ -30,9 +31,6 @@
   "workspaces": [
     "demo",
     "packages/**/*"
-  ],
-  "files": [
-    "./dist/**/*"
   ],
   "main": "./dist/index.js",
   "types": "./dist/types/index.d.ts",

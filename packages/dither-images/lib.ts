@@ -84,7 +84,7 @@ export function recursiveFindByExtension(base: string,ext: string,files: any,res
     result = result || [] 
 
     files.forEach( 
-        function (file) {
+        function (file: any) {
             var newbase = path.join(base,file)
             if ( statSync(newbase).isDirectory() )
             {

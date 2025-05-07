@@ -1,5 +1,5 @@
 ---
-
+import "./../../../dist/dithered-image-container.ts";
 ---
 
 <html>
@@ -9,8 +9,8 @@
 
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <script>
-      import "../../../packages/dither-images/dithered-image-container.js";
+    <script type="module">
+      import "./../../../dist/dithered-image-container.ts";
     </script>
     <title>Astro</title>
     <style is:global>

@@ -2,9 +2,9 @@ import { AstroIntegration } from "astro";
 import { cwd } from "node:process";
 import { PNG } from 'pngjs';
 import { createReadStream, createWriteStream} from "node:fs";
-import { BayerDithering, recursiveFindByExtension } from "./lib";
+import { BayerDithering, recursiveFindByExtension } from "./lib.js";
 
-import OptiPng from 'optipng'
+var OptiPng = require('optipng');
 
 interface ditherImagesOptions {
 	directoryToTraverse?: string;
