@@ -35,6 +35,11 @@
   "files": [
     "packages/dither-images/**"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
   "main": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
   "repository": {
