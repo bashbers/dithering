@@ -1,0 +1,48 @@
+.dithered-image-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    flex-grow: 0
+}
+
+.dithered-image-container > img {
+    flex-basis: 100%;
+    align-self: flex-start
+}
+
+.dithered-image-container > button {
+    flex-basis: 100%;
+    align-self: flex-end
+}
+
+.dithered {
+    /* Without a sepia filter, hue rotate does nothing for black and white images.*/
+    filter: sepia(100%) hue-rotate(90deg);
+}
+
+.dithered-button {
+    display: inline-block;
+    border: none; /* Remove borders */
+    padding: 12px 12px; /* Some padding */
+    cursor: pointer; /* Mouse pointer on hover */
+    position: relative;
+
+}
+
+.dithered-label {
+  position: absolute;
+  left: 100%; /* place it to the right of the button */
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  margin-left: 8px; /* space between button and label */
+}
+
+.dithered-button:hover .dithered-label {
+  visibility: visible;
+  opacity: 1;
+  margin-left: 6px;
+}

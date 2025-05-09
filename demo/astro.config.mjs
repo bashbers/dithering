@@ -1,12 +1,14 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import { rehypeDitheredImageContainerHtml, ditherImagesIntegration} from '../dist'
-import { cwd } from 'process';
+import { rehypeDitheredImageContainerHtml, ditherImagesIntegration} from '@bashbers/astro-image-dithering'
+
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-    markdown: {
-        rehypePlugins: [rehypeDitheredImageContainerHtml]
-    },
-    integrations: [ditherImagesIntegration()]
+  integrations: [ditherImagesIntegration()],
+
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });

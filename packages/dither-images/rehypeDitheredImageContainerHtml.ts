@@ -20,7 +20,22 @@ export const rehypeDitheredImageContainerHtml: Plugin<[], Root> = () => {
           const html = `
             <figure class="dithered-image-container" data-src-a="${originalSrc}" data-src-b="${ditheredSrc}">
                 <img class="dithered" src="${ditheredSrc}" alt="${alt}" />
-                <button type="button">Toggle</button>
+                <button class="dithered-button" type="button">
+                  <svg width="15" height="15" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="30" height="30" x="0" y="0" fill="black" />
+                    <rect width="30" height="30" x="30" y="0" fill="transparent" />
+                    <rect width="30" height="30" x="60" y="0" fill="black" />
+
+                    <rect width="30" height="30" x="0" y="30" fill="transparent" />
+                    <rect width="30" height="30" x="30" y="30" fill="black" />
+                    <rect width="30" height="30" x="60" y="30" fill="transparent" />
+
+                    <rect width="30" height="30" x="0" y="60" fill="black" />
+                    <rect width="30" height="30" x="30" y="60" fill="transparent" />
+                    <rect width="30" height="30" x="60" y="60" fill="black" />
+                  </svg>
+                  <span class="dithered-label">Toggle image</span>
+                </button>
             </figure>
           `;
 

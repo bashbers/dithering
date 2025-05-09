@@ -1,6 +1,6 @@
 ---
 title: "The greatest post of all time"
-author: "Ben"
+author: "Brian"
 layout: ../../layouts/BaseLayout.astro
 ---
 

@@ -6,12 +6,12 @@
         "moduleResolution": "NodeNext",
         "outDir": "./dist/",
         "rootDir": "./packages/dither-images",
-        "declarationDir": "./dist/types",
         "declaration": true,
+        "declarationMap": true,
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "declarationMap": true,
+        "typeRoots": ["./node_modules/@types", "./types"]
       },
       "include": ["./packages/dither-images"]
 }

@@ -6,7 +6,7 @@
     "start-astro": "astro --root demo dev",
     "build-astro": "astro --root demo build",
     "serve-astro": "astro --root demo preview",
-    "build": "npm run clean && npx tsc -p tsconfig.json",
+    "build": "npm run clean && npx tsc -p tsconfig.json && cp ./packages/dither-images/dither-image-toggle.css ./dist",
     "clean": "del-cli ./dist",
     "prepack": "npm run build"
   },
@@ -42,7 +42,7 @@
     }
   },
   "main": "./dist/index.js",
-  "types": "./dist/types/index.d.ts",
+  "types": "./dist/yyindex.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/bashbers/dithering.git"

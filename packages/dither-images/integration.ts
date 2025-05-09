@@ -3,8 +3,11 @@ import { cwd } from "node:process";
 import { PNG } from 'pngjs';
 import { createReadStream, createWriteStream} from "node:fs";
 import { BayerDithering, recursiveFindByExtension } from "./lib.js";
+import rehypeDitheredImageContainerHtml from "./rehypeDitheredImageContainerHtml.js";
+import { fileURLToPath } from "node:url";
 
-var OptiPng = require('optipng');
+// @ts-ignore
+const OptiPng = await import('optipng');
 
 interface ditherImagesOptions {
 	directoryToTraverse?: string;
@@ -59,7 +62,7 @@ export function ditherImagesIntegration(options: ditherImagesOptions = {}): Astr
 								}
 		
 								//Optimize range is between 1 and 7. Its lossless so we use 7.
-								const optimizer = new OptiPng(['-o7']); 
+								const optimizer = new OptiPng.default(['-o7']); 
 								const ditheredFilename = foundPng.split('.')[0] + "-dithered.png";
 								png.pack()
 									.pipe(optimizer)
@@ -73,7 +76,22 @@ export function ditherImagesIntegration(options: ditherImagesOptions = {}): Astr
 				});
 				await Promise.all(promises);
 				logger.info('🎉 All images dithered and saved before build continues!');
-				}
+				},
+				'astro:config:setup': ({ updateConfig, injectScript }) => {
+						const cssFilePath = fileURLToPath(new URL('./dither-image-toggle.css', import.meta.url));
+						const clientsideJsFilePath = fileURLToPath(new URL('./dithered-image-container.js', import.meta.url));
+
+						injectScript('page', `import "${cssFilePath}"';`);
+						injectScript('page', `import "${clientsideJsFilePath}";`);
+						
+						updateConfig({
+							markdown: {
+								rehypePlugins: [		
+									rehypeDitheredImageContainerHtml
+								]
+							}
+						});
+					}
 			}
 		}
 	}
