@@ -80,12 +80,12 @@ export function ditherImagesIntegration(options: ditherImagesOptions = {}): Astr
 				logger.info('🎉 All images dithered and saved before build continues!');
 				},
 				'astro:config:setup': ({ updateConfig, injectScript }) => {
-					if(options.injectClientsideJs) {
+					if(injectClientsideJs) {
 						injectScript('page', `
 							import '@bashbers/astro-image-dithering/dist/dithered-image-container.js';
 						`);
 					}
-					if(options.injectCss) {
+					if(injectCss) {
 						injectScript('page', `
 							import '@bashbers/astro-image-dithering/dist/dither-image-toggle.css';
 						`);
