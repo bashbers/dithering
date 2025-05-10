@@ -15,7 +15,17 @@ This image above is 29.07 kb.
 ![dithered image](./packages/dither-images/test_images/nontransparent-bg-dithered.png)
 The dithered image above is 3.43 kb
 
-A reduction of
+A reduction of more than 8 times the initial size of the image without loss of context to the reader. The black and white palette is not that appealing, so the integration will provide a client-side filter using css which allows you to style the image to your theme like so:
+
+![Example in application](./example-in-astro-app.png)
+
+See the [css-file](./packages/dither-images/dither-image-toggle.css) and the `.dithered` class.
+
+For more information about filter's hue-rotate property, [read up on the documentation on mozilla.org](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/hue-rotate). Find your color to use which matches your theme using [this handy page](https://web.archive.org/web/20160219005748/https://dl.dropboxusercontent.com/u/3260327/angular/CSS3ImageManipulation.html).
+
+## Limitations
+
+The current bayer dithering algorithm does not use the alpha channel of the png's provided. This causes transparent PNG's to look incorrect. A workaround is to only provide images with a solid color background (eg. white or black or any other color).
 
 ## Guide
 
@@ -51,10 +61,6 @@ If you want to apply custom css to the container, please set injectCss to false 
 - .dithered-image-container
 - .dithered-button
 - .dithered-label
-
-## Limitations
-
-The current bayer dithering algorithm does not use the alpha channel of the png's provided. This causes transparent PNG's to look incorrect. A workaround is to only provide images with a solid color background (eg. white or black or any other color).
 
 ## Future ideas
 
