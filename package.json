@@ -40,7 +40,9 @@
   "exports": {
     ".": {
       "import": "./dist/index.js"
-    }
+    },
+    "./dist/dither-image-toggle.css": "./dist/dither-image-toggle.css",
+    "./dist/dithered-image-container.js": "./dist/dithered-image-container.js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

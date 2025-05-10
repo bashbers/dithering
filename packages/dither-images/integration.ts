@@ -91,7 +91,7 @@ export function ditherImagesIntegration(options: ditherImagesOptions = {}): Astr
 							},
 							vite: {
 								ssr: {
-								noExternal: ['@bashbers/astro-image-dithering']
+									noExternal: ['@bashbers/astro-image-dithering']
 								}
 							}
 						});
