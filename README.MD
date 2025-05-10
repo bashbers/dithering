@@ -1,3 +1,5 @@
+![demo gif](./demo.gif)
+
 Astro package which exposes 3 files:
 
 - integration.ts
@@ -15,15 +17,15 @@ The
 The astro integration and the rehype plugin can be used like this in your astro.config.mjs:
 
 ```js
-import {
-  rehypeDitheredImageContainerHtml,
-  ditherImagesIntegration,
-} from "@bashbers/astro-image-dithering"; // This should be changed to the NPM package name
+import { ditherImagesIntegration } from "@bashbers/astro-image-dithering";
 
 export default defineConfig({
-  markdown: {
-    rehypePlugins: [rehypeDitheredImageContainerHtml],
-  },
-  integrations: [ditherImagesIntegration()],
+  integrations: [ditherImagesIntegration(
+    {
+      directoryToTraverse?: string; // Provide directory in which the plugin should search for images and dither them.
+      injectCss?: boolean; // Injects css which styles the figure, img and button for the images
+      injectClientsideJs?: boolean; // Injects js which toggles the img between dithered and non-dithered
+    }
+  )],
 });
 ```

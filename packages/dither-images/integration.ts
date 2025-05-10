@@ -4,17 +4,18 @@ import { PNG } from 'pngjs';
 import { createReadStream, createWriteStream} from "node:fs";
 import { BayerDithering, recursiveFindByExtension } from "./lib.js";
 import rehypeDitheredImageContainerHtml from "./rehypeDitheredImageContainerHtml.js";
-import { fileURLToPath } from "node:url";
 
 // @ts-ignore
 const OptiPng = await import('optipng');
 
 interface ditherImagesOptions {
 	directoryToTraverse?: string;
+	injectCss?: boolean;
+	injectClientsideJs?: boolean;
 }
 
 export function ditherImagesIntegration(options: ditherImagesOptions = {}): AstroIntegration {
-	const { directoryToTraverse = cwd() } = options;
+	const { directoryToTraverse = cwd(), injectCss = true, injectClientsideJs = true } = options;
 	return {
 		name: 'dither-images-integration',
 		hooks: {
@@ -24,7 +25,8 @@ export function ditherImagesIntegration(options: ditherImagesOptions = {}): Astr
 				
 				const promises = foundPngFiles.map((foundPng) => {
 					return new Promise<void>((resolve, reject) => {
-						if(foundPng.includes('-dithered.png') || foundPng.includes('dist\\')) {
+						// We skip dithered.png files, files inside dist folders to prevent double dithering and files from which an existing dithered.png exists
+						if(foundPng.includes('-dithered.png') || foundPng.includes('dist\\') || foundPngFiles.includes(foundPng + "-dithered.png")) {
 							return resolve();
 						}
 	
@@ -78,24 +80,30 @@ export function ditherImagesIntegration(options: ditherImagesOptions = {}): Astr
 				logger.info('🎉 All images dithered and saved before build continues!');
 				},
 				'astro:config:setup': ({ updateConfig, injectScript }) => {
+					if(options.injectClientsideJs) {
 						injectScript('page', `
-							import '@bashbers/astro-image-dithering/dist/dither-image-toggle.css';
 							import '@bashbers/astro-image-dithering/dist/dithered-image-container.js';
 						`);
-						
-						updateConfig({
-							markdown: {
-								rehypePlugins: [		
-									rehypeDitheredImageContainerHtml
-								]
-							},
-							vite: {
-								ssr: {
-									noExternal: ['@bashbers/astro-image-dithering']
-								}
-							}
-						});
 					}
+					if(options.injectCss) {
+						injectScript('page', `
+							import '@bashbers/astro-image-dithering/dist/dither-image-toggle.css';
+						`);
+					}
+					
+					updateConfig({
+						markdown: {
+							rehypePlugins: [		
+								rehypeDitheredImageContainerHtml
+							]
+						},
+						vite: {
+							ssr: {
+								noExternal: ['@bashbers/astro-image-dithering']
+							}
+						}
+					});
+				}
 			}
 		}
 	}
