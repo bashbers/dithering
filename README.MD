@@ -4,7 +4,7 @@
 
 ## Why?
 
-Want even quicker image loading times combined with a lower carbon footprint of serving your images? Use this plugin to dither your images before serving them to your audience! This decreases the image size dramatically whilst still providing your audience the context needed for your articles.
+Want even quicker image loading times combined with a lower carbon footprint of serving your images? Use this plugin to dither your images before serving them to your audience! This decreases the image size dramatically whilst still providing your audience the context needed for your articles. If needed, endusers are able to ask for the original image using a button below the image.
 
 For example:
 

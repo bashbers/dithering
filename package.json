@@ -53,7 +53,12 @@
   "keywords": [
     "dithering",
     "dither",
-    "astro"
+    "astro",
+    "withastro",
+    "media",
+    "image",
+    "perf",
+    "optimization"
   ],
   "bugs": {
     "url": "https://github.com/bashbers/dithering/issues"
