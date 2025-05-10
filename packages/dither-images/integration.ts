@@ -81,7 +81,7 @@ export function ditherImagesIntegration(options: ditherImagesOptions = {}): Astr
 						const cssFilePath = fileURLToPath(new URL('./dither-image-toggle.css', import.meta.url));
 						const clientsideJsFilePath = fileURLToPath(new URL('./dithered-image-container.js', import.meta.url));
 
-						injectScript('page', `import "${cssFilePath}"';`);
+						injectScript('page', `import "${cssFilePath}";`);
 						injectScript('page', `import "${clientsideJsFilePath}";`);
 						
 						updateConfig({
