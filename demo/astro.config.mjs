@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import { rehypeDitheredImageContainerHtml, ditherImagesIntegration} from '@bashbers/astro-image-dithering'
+import { ditherImagesIntegration} from '@bashbers/astro-image-dithering'
 
 import tailwindcss from '@tailwindcss/vite';
 

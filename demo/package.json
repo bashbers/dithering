@@ -10,7 +10,6 @@
     "postbuild": ""
   },
   "dependencies": {
-    "@bashbers/astro-image-dithering": "^1.0.1",
     "@tailwindcss/vite": "^4.1.6",
     "astro": "^5.7.10",
     "tailwindcss": "^4.1.6"
