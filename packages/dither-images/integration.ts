@@ -78,17 +78,21 @@ export function ditherImagesIntegration(options: ditherImagesOptions = {}): Astr
 				logger.info('🎉 All images dithered and saved before build continues!');
 				},
 				'astro:config:setup': ({ updateConfig, injectScript }) => {
-						const cssFilePath = fileURLToPath(new URL('./dither-image-toggle.css', import.meta.url));
-						const clientsideJsFilePath = fileURLToPath(new URL('./dithered-image-container.js', import.meta.url));
-
-						injectScript('page', `import "${cssFilePath}";`);
-						injectScript('page', `import "${clientsideJsFilePath}";`);
+						injectScript('page', `
+							import '@bashbers/astro-image-dithering/dist/dither-image-toggle.css';
+							import '@bashbers/astro-image-dithering/dist/dithered-image-container.js';
+						`);
 						
 						updateConfig({
 							markdown: {
 								rehypePlugins: [		
 									rehypeDitheredImageContainerHtml
 								]
+							},
+							vite: {
+								ssr: {
+								noExternal: ['@bashbers/astro-image-dithering']
+								}
 							}
 						});
 					}
