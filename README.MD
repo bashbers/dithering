@@ -13,6 +13,7 @@ For example:
 This image above is 29.07 kb.
 
 ![dithered image](./packages/dither-images/test_images/nontransparent-bg-dithered.png)
+
 The dithered image above is 3.43 kb
 
 A reduction of more than 8 times the initial size of the image without loss of context to the reader. The black and white palette is not that appealing, so the integration will provide a client-side filter using css which allows you to style the image to your theme like so:
